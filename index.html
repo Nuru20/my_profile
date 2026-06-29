@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuru Nabuuso — Explainable AI for Health</title>
+<meta name="description" content="Nuru Nabuuso — PhD researcher in Explainable AI at Universitat Pompeu Fabra. Building transparent, interpretable AI for healthcare, with a focus on childhood malnutrition in Uganda.">
+<meta property="og:title" content="Nuru Nabuuso — Explainable AI for Health">
+<meta property="og:description" content="PhD researcher building interpretable AI systems whose decisions can be understood, questioned, and trusted — for health systems in Uganda and beyond.">
+<meta property="og:type" content="profile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f1c1a;
+    --ink-soft:#3a4a47;
+    --ink-faint:#6c7b78;
+    --paper:#f6f4ed;
+    --paper-2:#efece2;
+    --line:#d9d4c6;
+    --teal:#0e6e56;
+    --teal-deep:#094d3c;
+    --amber:#b9722a;
+    --white:#fffdf8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  a{color:inherit}
+
+  /* ---- top bar ---- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,244,237,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .mark{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.04em;color:var(--teal-deep);font-weight:500}
+  .mark b{color:var(--ink)}
+  .nav{display:flex;gap:26px}
+  .nav a{font-size:13.5px;color:var(--ink-soft);text-decoration:none;transition:color .15s}
+  .nav a:hover{color:var(--teal)}
+  @media(max-width:680px){.nav{display:none}}
+
+  /* ---- hero ---- */
+  .hero{padding:84px 0 60px;border-bottom:1px solid var(--line)}
+  .hero-grid{display:grid;grid-template-columns:1fr 300px;gap:54px;align-items:center}
+  @media(max-width:820px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+  .portrait{
+    position:relative;width:100%;max-width:300px;aspect-ratio:4/5;
+    border-radius:16px;overflow:hidden;border:1px solid var(--line);
+    background:var(--paper-2);justify-self:end;
+  }
+  @media(max-width:820px){.portrait{justify-self:start;max-width:240px}}
+  .portrait img{width:100%;height:100%;object-fit:cover;display:block}
+  .portrait .ph{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:8px;
+    color:var(--ink-faint);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;
+  }
+  .portrait .ph span:first-child{font-size:26px;color:var(--line)}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:22px;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:clamp(40px,7vw,76px);
+    line-height:1.02;
+    letter-spacing:-.015em;
+    color:var(--ink);
+    max-width:14ch;
+  }
+  .hero h1 em{font-style:italic;color:var(--teal);font-weight:500}
+  .hero .lede{
+    margin-top:28px;
+    font-size:clamp(17px,2.1vw,20px);
+    color:var(--ink-soft);
+    max-width:60ch;
+  }
+  .hero-meta{
+    margin-top:34px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;
+  }
+  .chip{
+    font-size:13px;color:var(--ink-soft);
+    background:var(--white);border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;
+  }
+  .chip b{color:var(--teal-deep);font-weight:600}
+  .hero-actions{margin-top:38px;display:flex;flex-wrap:wrap;gap:12px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:14.5px;font-weight:500;text-decoration:none;
+    padding:12px 22px;border-radius:8px;transition:transform .12s, background .15s, border-color .15s;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--teal);color:var(--white)}
+  .btn-primary:hover{background:var(--teal-deep)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--teal)}
+  .btn .arw{font-family:'JetBrains Mono',monospace}
+
+  /* ---- section scaffold ---- */
+  section{padding:72px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:40px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--amber);padding-top:4px}
+  .sec-title{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,3.6vw,36px);letter-spacing:-.01em;color:var(--ink)}
+  .sec-sub{color:var(--ink-soft);font-size:16px;margin-top:8px;max-width:62ch}
+
+  /* ---- thesis / about ---- */
+  .thesis{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(21px,2.7vw,27px);line-height:1.45;color:var(--ink);max-width:30ch}
+  .thesis em{font-style:italic;color:var(--teal)}
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:34px}}
+  .about-body p{color:var(--ink-soft);font-size:16px;margin-bottom:16px}
+  .about-body p strong{color:var(--ink);font-weight:600}
+
+  /* ---- focus cards ---- */
+  .focus{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:6px}
+  @media(max-width:760px){.focus{grid-template-columns:1fr}}
+  .fcard{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px}
+  .fcard .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);letter-spacing:.06em}
+  .fcard h3{font-family:'Fraunces',serif;font-weight:500;font-size:20px;margin:12px 0 8px;color:var(--ink)}
+  .fcard p{font-size:14.5px;color:var(--ink-soft)}
+
+  /* ---- publications ---- */
+  .pub{
+    display:grid;grid-template-columns:88px 1fr auto;gap:22px;align-items:start;
+    padding:26px 0;border-top:1px solid var(--line);
+  }
+  .pub:last-child{border-bottom:1px solid var(--line)}
+  .pub-year{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--teal-deep);font-weight:500;padding-top:3px}
+  .pub-type{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-top:4px}
+  .pub-main h3{font-family:'Fraunces',serif;font-weight:500;font-size:19px;line-height:1.3;color:var(--ink);margin-bottom:8px}
+  .pub-main p{font-size:14.5px;color:var(--ink-soft);max-width:64ch}
+  .pub-authors{font-size:13.5px;color:var(--ink-faint);margin-top:10px}
+  .pub-authors b{color:var(--ink-soft);font-weight:600}
+  .pub-link{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--teal);
+    text-decoration:none;white-space:nowrap;border:1px solid var(--line);
+    padding:7px 13px;border-radius:7px;transition:all .15s;align-self:start
+  }
+  .pub-link:hover{border-color:var(--teal);background:var(--white)}
+  @media(max-width:680px){
+    .pub{grid-template-columns:1fr;gap:10px}
+    .pub-link{justify-self:start}
+  }
+
+  /* ---- build / tools ---- */
+  .tools{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.tools{grid-template-columns:1fr}}
+  .tool{
+    background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px;
+    display:flex;flex-direction:column;gap:14px;transition:border-color .15s, transform .12s;
+  }
+  .tool:hover{border-color:var(--teal);transform:translateY(-2px)}
+  .tool-top{display:flex;align-items:center;justify-content:space-between}
+  .live{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--teal);display:inline-flex;align-items:center;gap:6px}
+  .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(14,110,86,.5);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(14,110,86,.45)}70%{box-shadow:0 0 0 8px rgba(14,110,86,0)}100%{box-shadow:0 0 0 0 rgba(14,110,86,0)}}
+  @media(prefers-reduced-motion:reduce){.live::before{animation:none}}
+  .tool h3{font-family:'Fraunces',serif;font-weight:500;font-size:21px;color:var(--ink)}
+  .tool p{font-size:14.5px;color:var(--ink-soft);flex:1}
+  .tool .stack{display:flex;flex-wrap:wrap;gap:7px}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);background:var(--paper-2);border:1px solid var(--line);padding:4px 9px;border-radius:6px}
+  .tool a.go{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--teal);text-decoration:none}
+  .tool a.go:hover{color:var(--teal-deep)}
+
+  /* ---- timeline ---- */
+  .tl{display:grid;gap:0}
+  .tl-row{display:grid;grid-template-columns:140px 1fr;gap:26px;padding:22px 0;border-top:1px solid var(--line)}
+  .tl-row:last-child{border-bottom:1px solid var(--line)}
+  .tl-when{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--teal-deep)}
+  .tl-what h3{font-family:'Fraunces',serif;font-weight:500;font-size:19px;color:var(--ink);margin-bottom:4px}
+  .tl-what p{font-size:14.5px;color:var(--ink-soft)}
+  @media(max-width:680px){.tl-row{grid-template-columns:1fr;gap:6px}}
+
+  /* ---- vision band ---- */
+  .vision{background:var(--teal-deep);color:#eaf3ee;border:0;border-radius:0}
+  .vision .sec-title,.vision .thesis{color:var(--white)}
+  .vision .sec-num{color:#7fd3b8}
+  .vision .thesis em{color:#86e0c2}
+  .vision p{color:#cfe6dc;font-size:16px;max-width:64ch;margin-top:18px}
+  .vision .v-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:8px}
+  @media(max-width:760px){.vision .v-grid{grid-template-columns:1fr;gap:24px}}
+
+  /* ---- contact ---- */
+  .contact h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,4vw,40px);color:var(--ink);max-width:18ch;letter-spacing:-.01em}
+  .contact .lede{color:var(--ink-soft);font-size:17px;margin-top:16px;max-width:58ch}
+  .links{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px}
+  .lk{
+    display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    font-size:14px;color:var(--ink);background:var(--white);
+    border:1px solid var(--line);padding:11px 17px;border-radius:9px;transition:all .15s
+  }
+  .lk:hover{border-color:var(--teal);transform:translateY(-1px)}
+  .lk .m{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-faint)}
+
+  footer{padding:40px 0 60px}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;align-items:center;color:var(--ink-faint);font-size:13px}
+  .foot .mono{font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="mark"><b>NN</b> · explainable-ai</div>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#build">Built</a>
+      <a href="#vision">Vision</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">PhD Researcher · Explainable AI · Universitat Pompeu Fabra</div>
+        <h1>AI you can <em>question</em>, for decisions that matter.</h1>
+        <p class="lede">I'm Nuru Nabuuso. I build machine learning models whose reasoning can be seen, audited, and trusted — and I apply them to high-stakes health problems, starting with childhood malnutrition in Uganda.</p>
+        <div class="hero-meta">
+          <span class="chip"><b>Interpretable</b> by design</span>
+          <span class="chip"><b>3</b> publications</span>
+          <span class="chip"><b>2</b> tools live in the field</span>
+          <span class="chip">Barcelona · Kampala</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#research">Read the research <span class="arw">→</span></a>
+          <a class="btn btn-ghost" href="https://nuru20.github.io/xplainHealth/" target="_blank" rel="noopener">See XplainHealth</a>
+        </div>
+      </div>
+      <div class="portrait">
+        <img src="nuru.jpg" alt="Nuru Nabuuso" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ph" style="display:none">
+          <span>◎</span>
+          <span>Add nuru.jpg<br>to your repo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="sec-head"><span class="sec-num">01</span><div><div class="sec-title">About</div></div></div>
+        <p class="thesis">Powerful AI is spreading into clinics, banks, and ministries. Most of it <em>cannot explain itself</em> — and a decision no one can question is a decision no one can trust.</p>
+      </div>
+      <div class="about-body">
+        <p>I'm a Ugandan PhD researcher in <strong>Explainable Artificial Intelligence</strong> at Universitat Pompeu Fabra in Barcelona, supervised by Prof. Vladimir Estivill-Castro.</p>
+        <p>My work designs AI systems whose decision-making is <strong>understandable by construction</strong> — not explained after the fact by external tools, but transparent from the inside out. The goal is that clinicians, policymakers, and the people affected by a model can interpret, validate, and act on its predictions with confidence.</p>
+        <p>I came to this through <strong>health informatics</strong>. Before my PhD I earned a Master's at Makerere University and a computing degree at Kyambogo University. That background keeps my research anchored to a real question: would a health worker actually trust and use this?</p>
+      </div>
+    </div>
+
+    <div class="focus" style="margin-top:48px">
+      <div class="fcard">
+        <span class="k">FOCUS / 01</span>
+        <h3>Interpretable models</h3>
+        <p>Sparse oblique decision trees and forests that stay auditable as they scale — interpretability that originates in the model, not a wrapper around it.</p>
+      </div>
+      <div class="fcard">
+        <span class="k">FOCUS / 02</span>
+        <h3>AI for health</h3>
+        <p>Applying transparent ML to childhood malnutrition and community health screening, validated against national survey data.</p>
+      </div>
+      <div class="fcard">
+        <span class="k">FOCUS / 03</span>
+        <h3>Trust in deployment</h3>
+        <p>Studying what makes an explanation usable by a real clinician in a low-resource setting — where compute, data, and trust are all scarce.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <div>
+        <div class="sec-title">Research</div>
+        <div class="sec-sub">Peer-reviewed work on interpretable machine learning and explainable AI for health. Two further papers are under review at BMJ Global Health and BMJ Digital Health.</div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">2026<span class="pub-type">Article</span></div>
+      <div class="pub-main">
+        <h3>Efficient Construction of Interpretable Oblique Decision Trees</h3>
+        <p>A human-centred framework for building oblique decision trees that remain interpretable — using parallel-coordinate visualisation and sparsity to keep expressive splits auditable, where traditional oblique trees become opaque.</p>
+        <div class="pub-authors"><b>V. Estivill-Castro</b>, <b>N. Nabuuso</b></div>
+      </div>
+      <a class="pub-link" href="https://www.researchgate.net/publication/400638790_Efficient_Construction_of_Interpretable_Oblique_Decision_Trees" target="_blank" rel="noopener">View →</a>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">2025<span class="pub-type">Conference</span></div>
+      <div class="pub-main">
+        <h3>Greedy Algorithm for Building Sparse Linear Regression Models</h3>
+        <p>Addresses the interpretability of ML in high-stakes domains: a greedy approach to sparse linear models that preserves accountability and trust where black-box accuracy alone undermines ethical and legal compliance.</p>
+        <div class="pub-authors"><b>N. Nabuuso</b>, V. Estivill-Castro</div>
+      </div>
+      <a class="pub-link" href="https://www.researchgate.net/publication/405309142_Greedy_Algorithm_for_Building_Sparse_Linear_Regression_Models" target="_blank" rel="noopener">View →</a>
+    </div>
+
+    <div class="pub">
+      <div class="pub-year">2025<span class="pub-type">Conference</span></div>
+      <div class="pub-main">
+        <h3>Evaluating LIME and SHAP in Explaining Malnutrition Classification in Children Under Five</h3>
+        <p>Compares ML models — SVM, XGBoost, and neural networks — for predicting child malnutrition in Uganda, and evaluates how well LIME and SHAP explain their decisions. XGBoost gave the strongest predictive performance.</p>
+        <div class="pub-authors"><b>N. Nabuuso</b></div>
+      </div>
+      <a class="pub-link" href="https://www.researchgate.net/publication/389460157_Evaluating_LIME_and_SHAP_in_Explaining_Malnutrition_Classification_in_Children_Under_Five" target="_blank" rel="noopener">View →</a>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT -->
+<section id="build">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <div>
+        <div class="sec-title">Built &amp; deployed</div>
+        <div class="sec-sub">Research that ships. XplainHealth turns the malnutrition work into open-source tools real health workers can use — explainable, offline-capable, and free.</div>
+      </div>
+    </div>
+
+    <div class="tools">
+      <div class="tool">
+        <div class="tool-top"><span class="live">LIVE</span><span class="tag">Open source</span></div>
+        <h3>Community Screening App</h3>
+        <p>A six-input mobile app for community health workers that flags childhood stunting risk. Runs fully offline in the browser after first load — the model executes on-device, no internet needed for a prediction.</p>
+        <div class="stack"><span class="tag">Offline PWA</span><span class="tag">On-device ML</span><span class="tag">Android</span></div>
+        <a class="go" href="https://nuru20.github.io/community-malnutrition-app" target="_blank" rel="noopener">nuru20.github.io/community-malnutrition-app →</a>
+      </div>
+
+      <div class="tool">
+        <div class="tool-top"><span class="live">LIVE</span><span class="tag">SHAP XAI</span></div>
+        <h3>Research &amp; Clinical Dashboard</h3>
+        <p>A full stunting-risk predictor with SHAP explanations in plain language — showing exactly which factors drive each prediction. Built for researchers, clinicians, and District Health Officers, with a live population view.</p>
+        <div class="stack"><span class="tag">SHAP</span><span class="tag">Streamlit</span><span class="tag">XGBoost</span></div>
+        <a class="go" href="https://malnutrition-tool.streamlit.app" target="_blank" rel="noopener">malnutrition-tool.streamlit.app →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision" class="vision">
+  <div class="wrap">
+    <div class="v-grid">
+      <div>
+        <div class="sec-head"><span class="sec-num">04</span><div><div class="sec-title">The bigger goal</div></div></div>
+        <p class="thesis">An <em>explainable AI lab</em> in Uganda — building trustworthy AI for health and other high-stakes domains, and training the researchers who will carry it forward.</p>
+      </div>
+      <div>
+        <p>Most health AI deployed across Africa is trained on data that doesn't represent the people it serves, and offers no way to question its outputs. I want to change where that work happens — and who does it.</p>
+        <p>The long-term ambition is a research lab rooted at home: studying interpretable AI, working directly with Makerere University and Uganda's Ministry of Health, and proving that transparency, local relevance, and strong performance can hold together at once.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="path">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><div><div class="sec-title">Path</div></div></div>
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-when">2024 — present</div>
+        <div class="tl-what"><h3>PhD Researcher, Explainable AI</h3><p>Universitat Pompeu Fabra, Barcelona · Department of Engineering. Interpretable models for high-stakes decision-making.</p></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">2021 — 2023</div>
+        <div class="tl-what"><h3>MSc, Health Informatics</h3><p>Makerere University, Kampala. Where the health focus and the malnutrition research began.</p></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">2011 — 2015</div>
+        <div class="tl-what"><h3>BSc, Computing</h3><p>Kyambogo University, Kampala.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Let's build trustworthy AI together.</h2>
+    <p class="lede">I'm open to research collaborations, institutional partnerships in Uganda, funding conversations, and speaking. If you work in explainable AI, global health, or AI for social good — get in touch.</p>
+    <div class="links">
+      <a class="lk" href="mailto:nuru.nabuuso@upf.edu"><span class="m">✉</span> nuru.nabuuso@upf.edu</a>
+      <a class="lk" href="https://www.linkedin.com/in/nurunabuuso/" target="_blank" rel="noopener"><span class="m">in</span> LinkedIn</a>
+      <a class="lk" href="https://www.researchgate.net/profile/Nuru-Nabuuso-2" target="_blank" rel="noopener"><span class="m">RG</span> ResearchGate</a>
+      <a class="lk" href="https://github.com/Nuru20" target="_blank" rel="noopener"><span class="m">{ }</span> GitHub</a>
+      <a class="lk" href="https://nuru20.github.io/xplainHealth/" target="_blank" rel="noopener"><span class="m">↗</span> XplainHealth</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span class="mono">Nuru Nabuuso — Explainable AI for Health</span>
+      <span class="mono">Barcelona · Kampala · © 2025</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
